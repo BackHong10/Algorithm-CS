@@ -1,0 +1,23 @@
+function solution(people, limit) { 
+    people.sort((a,b) => b-a);
+    let i = 0;
+    let r = people.length-1;
+    let count = 0;
+    while(true){
+        let num = people[i] + people[r];
+        if(num <= limit){
+            count++;
+            i++;
+            r--;
+        }
+        else{
+            count++;
+            i++;
+        }
+       if(i === people.length || i > r){
+           break;
+        }  
+    }
+    return count;
+ 
+}

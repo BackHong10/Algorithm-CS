@@ -1,0 +1,20 @@
+function solution(arr) {
+    let max = Math.max(...arr)
+    arr.sort((a,b) => a-b)
+  let i = 2
+  while(true){
+    let num = i * max
+    if(qqq(arr,num)) return num
+    i++
+  }
+}
+
+function qqq(arr,max) {
+    let arr2 = []
+    for(let i = 0; i < arr.length-1;i++){
+        let num = max % arr[i]
+        arr2.push(num)
+    }
+    
+    return arr2.every((el) => el === 0)
+}

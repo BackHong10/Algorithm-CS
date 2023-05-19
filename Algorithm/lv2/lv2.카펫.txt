@@ -1,0 +1,27 @@
+function solution(brown, yellow) {
+    let num = brown + yellow
+    let arr = []
+    
+    for(let i = 1; i <= num;i++){
+        if(num % i === 0) arr.push(i)
+    }
+    // if(arr.length % 2 === 1){
+    //     let num = Math.floor(arr.length / 2)
+    //     return [arr[num],arr[num]]
+    // }
+    // else{
+    //     let num = arr.length / 2
+    //     return [arr[num],arr[num-1]]
+    // }
+        let i = 0;
+        let r = arr.length-1
+    while(true){
+       if((arr[r]-2) * (arr[i]-2) === yellow) return [arr[r],arr[i]]
+        else{
+            r--
+            i++
+        }
+    }
+    
+    console.log(arr)
+}

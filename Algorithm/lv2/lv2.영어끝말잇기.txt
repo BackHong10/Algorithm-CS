@@ -1,0 +1,19 @@
+function solution(n, words) {
+    let arr = []
+    let count = 1
+    arr.push(words[0])
+    for(let i = 1; i < words.length;i++){
+        if(!arr.includes(words[i]) && words[i-1].charAt(words[i-1].length-1) === words[i].charAt(0)){
+            arr.push(words[i])
+            count++
+            if(count >n) count = 1
+        }else{
+            count++
+            break;
+        }
+    }
+    if(arr.length === words.length) return [0,0]
+    if(count > n) count = 1
+    
+   return [count,Math.ceil((arr.length / n) + 1)]
+}

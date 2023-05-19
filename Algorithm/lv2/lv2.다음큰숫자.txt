@@ -1,0 +1,15 @@
+function solution(n) {
+   let num = n.toString(2).replaceAll("0","").length
+   let i = n+1
+   let num2 = i.toString(2).replaceAll("0","").length
+   while(true){
+       let num2 = i.toString(2).replaceAll("0","").length
+       if(num2 === num){
+           break;
+       }
+       else{
+           i++
+       }
+   }
+    return i
+}

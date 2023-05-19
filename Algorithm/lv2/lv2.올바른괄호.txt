@@ -1,0 +1,24 @@
+function solution(s){
+    let answer = 0;
+    
+    if(s[0] === ")" || s[s.length -1] === "("){
+       return false; 
+    } 
+    
+    if(s.length % 2 === 1 || s.length < 2){
+        return false;
+    }
+
+    for(let i = 0; i < s.length;i++){
+        if(s[i] === "("){
+           answer++; 
+        } 
+        else {
+            answer--;
+        }
+        if(answer < 0){
+           return false; 
+        } 
+    }
+    return answer > 0 ? false : true;
+}

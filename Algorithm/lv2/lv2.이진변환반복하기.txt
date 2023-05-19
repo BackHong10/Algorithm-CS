@@ -1,0 +1,14 @@
+function solution(s) {
+    let countZ = 0
+    let count = 0
+    while(s !== "1"){
+       while(s.includes("0")){
+           countZ++
+           s = s.replace("0","")
+       }
+        s = s.length.toString(2)
+        count++
+    }
+    return [count, countZ]
+    
+}
