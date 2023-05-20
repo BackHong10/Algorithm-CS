@@ -1,0 +1,58 @@
+
+
+
+function solution(numbers, hand) {
+  let answer = ""
+  const L = [1,4,7]
+  const R = [3,6,9]
+  const hands = {
+    left : 10,
+    right : 12,
+}
+    for(let i = 0; i < numbers.length;i++){
+      console.log(numbers[i])
+      if(L.includes(numbers[i])){
+        answer += "L"
+        hands.left = numbers[i]
+        
+      }
+      else if(R.includes(numbers[i])){
+        answer += "R"
+        hands.right = numbers[i]
+      }
+      
+      else{
+        let copyHands = {...hands}
+        console.log(copyHands)
+        let location = 0
+        for(key in copyHands){
+        numbers[i] === 0 ? numbers[i] = 11 : numbers[i] = numbers[i]
+           location = Math.abs(numbers[i] - copyHands[key] )
+          if(location >= 3){
+            location = Math.trunc((location / 3)) + (location % 3)
+          }
+          console.log(copyHands)
+          copyHands[key] = location
+        }
+        if(copyHands.left > copyHands.right){
+          answer += "R"
+          hands.right = numbers[i]
+        }
+        else if(copyHands.left < copyHands.right){
+          answer += "L"
+          hands.left = numbers[i]
+        }
+        else{
+          if(hand === "left"){
+            answer += "L"
+            hands.left = numbers[i]
+          }
+          else{
+            answer += "R"
+            hands.right = numbers[i]
+          }
+        }
+      }
+    }
+  return answer
+}
