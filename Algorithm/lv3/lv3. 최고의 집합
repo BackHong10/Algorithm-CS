@@ -1,0 +1,17 @@
+function solution(n, s) {
+    if(s<n) return [-1];
+    
+    let re = s % n;
+    const num = Math.floor(s/n);
+    
+    let answer = new Array(n).fill(num);
+  
+   for(let i = 0; i < re; i++){
+       answer[i]++;
+   }
+
+    return answer.sort();
+    
+}
+
+// n개 만큼 같은 수를 나눠갖고, 나눠가지는 수를 다 더한 값을 s에서 뺀 나머지를 1씩 더 나눠주면 된다.
