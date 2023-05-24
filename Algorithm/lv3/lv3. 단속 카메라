@@ -1,0 +1,18 @@
+function solution(routes) {
+    routes.sort((a,b) => a[1] - b[1])
+    let min = -30001
+    let answer = 0
+    for(let i = 0 ; i < routes.length;i++){
+        const [fir,sec] = routes[i]
+        if(min >= fir){
+            continue
+        }
+        else{
+            answer++
+            min = sec
+        }
+    }
+    return answer
+    
+}
+어렵다...
