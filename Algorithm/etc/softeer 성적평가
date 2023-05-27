@@ -1,0 +1,89 @@
+// 시간초과
+
+const readline = require("readline")
+
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
+});
+let count = 0;
+
+let input = [];
+let arr = []
+rl.on("line", function(x){
+	count++;
+    
+	if(count === 1){
+		
+	} else {
+		input[count - 2] = x.split(" ").map(el => Number(el))
+        arr[count - 2] = x.split(" ").map(el => Number(el))
+	}
+	if(count > 3){
+		rl.close();
+	}
+}).on("close", function(){
+    let arr2 = [];
+    let arr3 = [];
+    let newObj = [];
+    let newObj2 = [];
+    let i = 0;
+    
+    for(i = 0; i < input[0].length;i++){
+        let result = 0;
+        for(let j = 0; j < 3;j++){
+            
+            result += input[j][i];
+        }
+        arr2.push(result);
+        arr3.push(result);
+    }
+    let obj2 = {};
+    for(let i = 0; i < arr2.length;i++){
+        arr2.sort((a,b) => b-a);
+        
+        if(arr2[i] !== arr2[i-1]){
+            obj2[arr2[i]] = i + 1;
+        }
+        else{
+            obj2[arr2[i]] = obj2[arr2[i-1]];
+        }
+        newObj2.push(obj2);
+    }
+    
+    
+	for(let i = 0; i < input.length;i++){
+        input[i].sort((a,b) => b-a);
+        let obj = {};
+        for(let j = 0 ;j < input[i].length;j++){
+            if(input[i][j] !== input[i][j-1]){
+                obj[input[i][j]] = j+1;
+            }
+            else{
+                obj[input[i][j]] = obj[input[i][j-1]];
+            }
+        }
+        newObj.push(obj);
+    }
+    let answer = []
+    let arr4 = []
+      for(let i = 0; i < arr.length;i++){
+         let arr2 = [];
+        for(let j = 0; j < arr[i].length;j++){
+            arr2.push(newObj[i][arr[i][j]]);
+        }
+        answer.push(arr2);
+        console.log();
+    }
+    
+    
+    for(let i = 0; i < arr3.length;i++){
+        arr4.push(newObj2[0][arr3[i]]);
+    }
+    answer.push(arr4)
+    for(let i = 0; i < answer.length;i++){
+        console.log(...answer[i]);
+    }
+    process.exit();
+	
+});
