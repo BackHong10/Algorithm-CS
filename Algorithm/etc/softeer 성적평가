@@ -87,3 +87,49 @@ rl.on("line", function(x){
     process.exit();
 	
 });
+
+// 시간초과 2
+const readline = require("readline")
+
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
+});
+let count = 0;
+let input = [];
+let arr = []
+rl.on("line", function(x){
+	count++;
+	if(count === 1){
+	} else {
+		input[count - 2] = x.split(" ").map(el => Number(el));
+	}
+	if(count > 3){
+		rl.close();
+	}
+}).on("close", function(){
+    let arr2 = [];
+    
+    for(i = 0; i < input[0].length;i++){
+        let result = 0;
+        for(let j = 0; j < 3;j++){
+            result += input[j][i];
+        }
+        arr2.push(result);
+    }
+    input.push(arr2)
+    let newArr = input.map((el) => [...el])
+    
+    for(let i = 0; i < input.length;i++){
+        let temp = [];
+        input[i].sort((a,b) => b-a);
+        for(let j = 0; j < input[i].length;j++){
+            let num = input[i].indexOf(newArr[i][j]);
+            temp.push(num+1);
+        }
+        console.log(...temp);
+    }
+   
+    process.exit();
+	
+});
