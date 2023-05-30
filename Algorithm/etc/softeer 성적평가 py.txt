@@ -1,0 +1,27 @@
+import sys
+import copy
+
+n = int(input())    
+
+arr = [list(map(int, input().split())) for _ in range(3)]
+temp = []
+answer = []
+for i in range(len(arr[0])):
+    result = 0
+    for j in range(3):
+        result = result + arr[j][i]
+    temp.append(result)
+arr.append(temp)
+
+newArr = copy.deepcopy(arr)
+
+
+for i in range(len(newArr)):
+    arr[i].sort(reverse = True)
+    temp2 = []
+    for j in range(n):
+        num = arr[i].index(newArr[i][j])
+        temp2.append(num+1)
+    print(*temp2)
+
+// 이것도 역시 시간초과
