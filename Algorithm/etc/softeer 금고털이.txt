@@ -1,0 +1,44 @@
+const readline = require('readline')
+
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
+});
+
+let n = 0
+let count = 0
+let arr = []
+
+rl.on('line',(x) => {
+    count++
+    if(count === 1){
+        n = x.split(" ")[1]
+        arr.push(x.split(" ").map(el => Number(el)))
+    }
+    else{
+        arr.push(x.split(" ").map(el => Number(el)))
+    }
+
+    if(count > n){
+        rl.close()
+    }
+}).on('close', function(){
+    let answer = 0
+    let bag = arr.shift()[0]
+    arr.sort((a,b) => b[1] - a[1])
+
+   for(let i = 0; i < arr.length;i++){
+       const [weight, price] = arr[i];
+
+       if(bag > weight){
+           answer += weight * price;
+           bag -= weight;
+       }
+       else{
+           answer += bag * price;
+           break;
+       }
+   }
+   console.log(answer);
+    
+})
