@@ -1,0 +1,58 @@
+const readline = require("readline")
+
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
+});
+
+
+let arr = []
+rl.on('line', function(x) {
+    arr[0] = x.split(" ").map((el) => Number(el))
+    rl.close()
+}).on('close', function() {
+    let asc = qqq(arr[0])
+    let desc = www(arr[0])
+
+    if(asc){
+        console.log("ascending")
+        return;
+    }
+
+    if(desc){
+        console.log("descending")
+        return;
+    }
+
+    console.log('mixed')
+})
+
+function qqq(arr){
+    let min = arr[0]
+    
+
+    for(let i = 1; i < arr.length;i++){
+        if(min < arr[i]){
+            min = arr[i]
+        }
+        else{
+            return false
+        }
+    }
+    return true
+
+}
+
+
+function www(arr){
+    let max = arr[0]
+    for(let i = 1; i < arr.length;i++){
+        if(max > arr[i]){
+            max = arr[i]
+        }
+        else{
+            return false
+        }
+    }
+    return true
+}
