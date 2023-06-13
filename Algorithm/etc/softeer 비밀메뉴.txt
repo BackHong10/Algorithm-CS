@@ -1,0 +1,52 @@
+const readline = require("readline")
+
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
+});
+let count = 0;
+let input = [];
+rl.on("line", function(x){
+	count++;
+	if(count === 1){
+	} else {
+		input[count - 2] = x.split(" ").map(el => Number(el));
+	}
+	if(count > 3){
+		rl.close();
+	}
+}).on("close", () => {
+    
+    let arr = input[0]
+    let arr2 = input[1]
+    let len = arr.length
+    
+
+    if(arr.length > arr2.length){
+        console.log('normal')
+        return;
+    }
+
+    for(let i = 0; i < arr2.length;i++){
+        let temp = arr2.slice(i,i+len)
+        if(temp.length < len){
+            break;
+        }
+        if(vali(arr,temp)){
+            console.log("secret")
+            return
+        }
+
+    }
+    console.log('normal')
+
+})
+
+const vali = (arr,temp) => {
+    for(let i = 0; i < arr.length;i++){
+        if(arr[i] !== temp[i]){
+            return false
+        }
+    }
+    return true
+}
