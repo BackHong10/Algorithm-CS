@@ -1,0 +1,80 @@
+const readline = require("readline")
+
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
+});
+const info = [
+    [0,0,0,1,0,0,0], // 0
+    [1,1,0,1,1,0,1], // 1
+    [0,1,0,0,0,1,0], // 2
+    [0,1,0,0,1,0,0], // 3
+    [1,0,0,0,1,0,1], // 4
+    [0,0,1,0,1,0,0], // 5
+    [0,0,1,0,0,0,0], // 6
+    [0,0,0,1,1,0,1], // 7
+    [0,0,0,0,0,0,0], // 8
+    [0,0,0,0,1,0,0], // 9
+] 
+let count = 0;
+let input = [];
+let n = 0
+rl.on("line", function(x){
+	count++;
+	if(count === 1){
+        n = x
+	} else {
+		input[count - 2] = x.split(" ").map(el => el);
+	}
+	if(count > n){
+		rl.close();
+	}
+}).on("close", function(){
+    
+
+    while(input.length){
+        let [fir,sec] = input.shift()
+        fir = fir.padStart(5,"a")
+        sec = sec.padStart(5,"a")
+        vali(fir,sec)
+
+    }
+
+    
+})
+
+const vali = (str1,str2) => {
+    let count = 0
+
+    for(let i = 0; i < str1.length; i++){
+        if(str1[i] === str2[i]){
+            continue;
+        }
+        else{
+            
+            count += vali2(info[Number(str1[i])], info[Number(str2[i])])
+        }
+    }
+
+    console.log(count)
+}
+
+const vali2 = (arr1,arr2) => {
+    let count = 0
+
+    if(arr1 === undefined){
+        arr1 = [1,1,1,1,1,1,1]
+    }
+
+    if(arr2 === undefined){
+        arr2 = [1,1,1,1,1,1,1]
+    }
+
+    for(let i = 0; i < arr1.length;i++){
+        if(arr1[i] !== arr2[i]){
+            count++
+        }
+    }
+
+    return count
+}
