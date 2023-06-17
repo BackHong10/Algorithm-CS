@@ -1,0 +1,48 @@
+const readline = require("readline")
+
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
+});
+let count = 0
+let n = 0
+let input = []
+rl.on("line", function(x){
+    count++
+
+    if(count === 1){
+        n = Number(x.split(" ")[1]) + 1
+    }
+    else{
+        input[count - 2] = x.split(" ").map((el) => Number(el))
+    }
+
+    if(count > n){
+        rl.close()
+    }
+}).on("close", function(){
+    
+
+    let grade = input.shift()
+
+    for(let i = 0; i < input.length;i++){
+        const [fir,sec] = input[i]
+
+        let temp = grade.slice(fir-1,sec)
+
+        sum(temp)
+    }
+
+})
+
+function sum(arr){
+    let len = arr.length
+    let result = 0
+    
+    for(let i = 0; i < arr.length;i++){
+        result += arr[i]
+    }
+
+    // console.log(Math.round((result/len)*100) / 100)
+    console.log((result/len).toFixed(2))
+}
