@@ -1,0 +1,36 @@
+const readline = require("readline")
+
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
+});
+
+let count = 0
+let input;
+rl.on("line", function(x){
+    count++
+
+    if(count === 1){
+
+    }
+    else{
+        input= x.split(" ").map((el) => Number(el))
+        rl.close()
+    }
+})
+.on("close", function(){
+    let dp = new Array(input.length).fill(1)
+
+    
+
+    for(let i = 1; i < dp.length;i++){
+        let num = 0
+        for(let j = 0; j < i; j++){
+            if(input[j] < input[i]){
+                num = Math.max(num,dp[j])
+            }
+            dp[i] = num+1
+        }
+    }
+    console.log(Math.max(...dp))
+})
