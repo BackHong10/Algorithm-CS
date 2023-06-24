@@ -1,0 +1,42 @@
+const readline = require("readline")
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+})
+
+let count = 0
+
+let arr = []
+rl.on("line", function(x){
+    count++
+
+    if(count === 1){
+        arr[0] = x.split(" ").map((el) => +el)
+    }
+    else{
+        arr[1] = x.split("")
+    }
+})
+.on("close", function(){
+    const [n,k] = arr[0];
+    let newArr = arr[1];
+    let answer = 0;
+
+    for(let i = 0; i < n;i++){
+        if(newArr[i] === 'P'){
+            for(let j = i-k; j <= i+k;j++){
+                if(j < 0 || j > n){
+                    continue;
+                }
+                else if(newArr[j] === 'H'){
+                    answer++;
+                    newArr[j] = "x";
+                    break;
+                }
+            }
+        }
+    }
+    
+    console.log(answer);
+})
