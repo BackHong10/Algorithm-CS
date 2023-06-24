@@ -1,0 +1,67 @@
+const readline = require("readline")
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+
+})
+
+let count = 0
+let n = 0
+let arr = []
+
+rl.on("line", function(x){
+    count++
+
+    if(count === 1){
+        n = x
+    }
+    else{
+        arr[count-2] = x.split("").map((el) => +el)
+    }
+
+    if(count > n+1){
+        rl.close()
+    }
+})
+.on("close", function(){
+    let answer = []
+
+    for(let i = 0; i < n;i++){
+        for(let j = 0; j < n;j++){
+            let temp = dfs(i,j)
+
+            if(temp){
+                answer.push(temp)
+            }
+        }
+    }
+
+    console.log(answer.length)
+    answer.sort((a,b) => a-b)
+    for(let qqq of answer){
+        console.log(qqq)
+    }
+    
+})
+
+function dfs(x,y){
+    if(x < 0 || x >= n || y < 0 || y >= n){
+        return 0;
+    }
+
+    if(arr[x][y] === 1){
+        arr[x][y] = 0
+
+        let count = 1
+
+        count += dfs(x - 1, y)
+        count += dfs(x, y - 1)
+        count += dfs(x + 1, y)
+        count += dfs(x, y + 1)
+
+        return count
+    }
+
+    return 0;
+}
