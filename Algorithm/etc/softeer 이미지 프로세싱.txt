@@ -1,0 +1,70 @@
+const fs = require('fs');
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n").map((el) => el.split(" ").map(e => +e));
+
+
+
+
+
+
+const [h,w] = input.shift()
+
+let image = []
+
+let temp1 = []
+
+for(let i = 0; i < w+2;i++){
+    temp1.push(0)
+}
+
+image.push(temp1)
+
+for(let i = 0; i < h;i++){
+    let temp = "0" + input.shift().join("") + "0"
+    image.push(temp.split("").map(el => +el))
+}
+let temp = []
+
+for(let i = 0; i < w+2;i++){
+    temp.push(0)
+}
+
+image.push(temp)
+
+let n = +input.shift()
+
+
+
+const color = (x,y,c) => {
+    
+    let oldC = image[x][y]
+    
+    image[x][y] = c
+
+    if(image[x-1][y] === oldC){
+        color(x-1,y,c)
+    }
+    if(image[x+1][y] === oldC){
+        color(x+1,y,c)
+    }
+    if(image[x][y-1] === oldC){
+        color(x,y-1,c)
+    }
+    if(image[x][y+1] === oldC){
+        color(x,y+1,c)
+    }
+    return
+}
+
+for(let i = 0; i < input.length;i++){
+    const [x,y,c] = input[i]
+    
+    color(x,y,c)
+}
+
+for(let i = 1; i < h+1;i++){
+    for(let j = 1; j < w+1;j++){
+        process.stdout.write(`${image[i][j]} `)
+    }
+    console.log()
+    
+}
