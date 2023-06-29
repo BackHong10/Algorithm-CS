@@ -1,0 +1,25 @@
+import sys
+import heapq
+
+n = int(sys.stdin.readline())
+
+arr = []
+
+for i in range(n):
+    s,f = map(int, sys.stdin.readline().split())
+
+    heapq.heappush(arr, (f,s))
+
+
+answer = 0
+fTime = 0
+
+while arr:
+    f,s = heapq.heappop(arr)
+
+    if fTime <= s:
+        answer += 1
+        fTime = f
+        
+
+print(answer)
