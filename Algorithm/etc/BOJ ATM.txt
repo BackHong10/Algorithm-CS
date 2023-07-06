@@ -1,0 +1,20 @@
+const fs = require('fs');
+const [n, ...arr] = fs.readFileSync("/dev/stdin").toString().trim().split(/\s/).map(el => +el);
+
+
+
+arr.sort((a,b) => a-b)
+
+
+let answer = 0
+let sum = 0
+
+
+for(let i = 0; i < n;i++){
+    
+    sum += arr[i]
+    answer += sum
+    
+}
+
+console.log(answer)

@@ -1,0 +1,24 @@
+const fs = require('fs');
+const arr = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+
+for(let i = 0; i < arr.length; i++){
+    arr[i] = arr[i].split(" ").map(el => +el)
+}
+let n = arr.shift()[0]
+
+let dist = [0]
+let price = [0]
+
+dist.push(...arr[0])
+price.push(...arr[1])
+let max = 1000000000
+
+let sum = 0
+
+for(let i = 1; i <= n-1;i++){
+    if(price[i] < max){
+        max = price[i]
+    }
+    sum += max * dist[i]
+}
+console.log(sum)
