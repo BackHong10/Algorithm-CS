@@ -1,0 +1,34 @@
+import sys
+import copy
+
+n,m = list(map(int,input().split()))
+
+arr = []
+Max = 0
+ans = 0
+
+for i in range(n):
+    temp = int(input())
+    arr.append(temp)
+    Max = max(Max,temp) 
+
+left = 1
+right = Max
+mid = 0
+
+
+while left <= right:
+    now = 0
+    mid = int((left + right) / 2)
+
+    for i in range(n):
+        now += int(arr[i] / mid)
+    
+    if now >= m:
+        left = mid + 1
+        ans = max(ans,mid)
+    else:
+        right = mid-1
+    
+
+print(ans)
