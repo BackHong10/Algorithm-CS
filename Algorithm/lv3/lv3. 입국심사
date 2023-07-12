@@ -1,0 +1,22 @@
+def solution(n, times):
+    Max = 1000000000 * n
+    
+    left = 1
+    right = Max
+    mid = 0
+    ans = 0
+    while left <= right:
+        mid = (left + right) // 2
+        temp = 0
+        
+        for i in times:
+            temp += mid//i
+        
+        if temp < n:
+            left = mid + 1
+            ans = max(mid,ans)
+        else:
+            right = mid-1
+            
+            
+    return ans
