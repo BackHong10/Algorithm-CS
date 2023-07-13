@@ -1,0 +1,67 @@
+import sys
+
+n = int(input())
+
+arr = list(map(int,input().split()))
+answer = []
+
+for i in arr:
+    if len(answer) == 0:
+        answer.append(i)
+    else:
+        if answer[-1] < i:
+            answer.append(i)
+        else:
+            left = 1
+            right = len(answer)
+            while left < right:
+                mid = (left + right) // 2
+
+                if answer[mid] < i:
+                    left = mid + 1
+                else:
+                    right = mid
+            answer[right] = i
+
+
+print(len(answer))
+
+
+
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+long long int ans;
+long long int N, K;
+long long int list[1000001];
+int main(void) {
+	std::ios::sync_with_stdio(false);
+	std::cin.tie(NULL);
+	vector<int> v;
+	
+	cin >> N;
+	for (int i = 0; i < N; i++)
+	{
+		cin >> K;
+		if (v.empty() || v.back() < K)
+		{
+			v.push_back(K);
+		}
+		else
+		{
+			auto lower = lower_bound(v.begin(), v.end(), K);
+			*lower = K;
+		}
+	}
+	cout << v.size();
+	
+	
+
+	
+
+	
+	return 0;
+}
