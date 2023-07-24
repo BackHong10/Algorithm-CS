@@ -1,0 +1,26 @@
+function solution(n, computers) {
+    let arr = []
+    let visited = []
+    
+    let answer = 0
+    
+    for(let i = 0; i < n; i++){
+        if(!visited.includes(i)){
+            arr.push(i)
+            answer++
+            
+            while (arr.length){
+                let now = arr.pop()
+                
+                for(let j = 0; j < n;j++){
+                    if(computers[now][j] === 1 && !visited.includes(j)){
+                        arr.push(j)
+                        visited.push(j)
+                    }
+                }
+            }
+               
+        }
+    }
+    return answer
+}

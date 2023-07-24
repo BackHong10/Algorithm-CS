@@ -1,0 +1,29 @@
+function solution(genres, plays) {
+    const obj = {};
+    const index = {};
+    const arr = [];
+    let answer = [];
+    for(let i = 0; i < genres.length;i++){
+        if(!obj[genres[i]]) obj[genres[i]] = plays[i];
+        else obj[genres[i]] += plays[i];
+        
+        if(!index[genres[i]]) index[genres[i]] = [[i,plays[i]]];
+        else index[genres[i]].push([i,plays[i]]);
+            
+        
+    }
+
+    for(qqq in obj){
+        arr.push({genre : qqq, order: obj[qqq]});
+    }
+    arr.sort((a,b) => b.order - a.order);
+    
+    for(qqq of arr){
+        
+       for(www of index[qqq.genre].sort((a,b) => b[1] - a[1]).slice(0,2)){
+           answer.push(www[0]);
+       }
+        
+    }
+    return answer;
+}
