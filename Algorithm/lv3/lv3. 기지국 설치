@@ -1,0 +1,18 @@
+function solution(n, stations, w) {
+    let answer = 0
+    let range = w * 2 + 1
+    
+    let now = 1
+    
+    for(qqq of stations){
+        let length = qqq - w - now
+        if(length > 0){
+            answer += Math.ceil(length / range)
+        }
+        now = qqq + w + 1
+    }
+    if(n >= now){
+            answer += Math.ceil((n - now + 1) / range)
+        }
+    return answer
+}

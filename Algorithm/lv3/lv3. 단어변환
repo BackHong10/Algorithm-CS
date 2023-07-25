@@ -1,0 +1,35 @@
+function solution(begin, target, words) {
+    
+    if(!words.includes(target)){
+        return 0;
+    }
+    
+    let arr = [];
+    arr.push([begin,0]);
+    
+    while (arr.length > 0){
+        let visited = new Array(words.length).fill(0);
+        
+        const [word,idx] = arr.shift();
+        
+        if(word === target){
+            return idx;
+        }
+        
+        for(let i = 0; i < words.length;i++){
+            for(let j = 0; j < words[i].length;j++){
+                if(word[j] === words[i][j]){
+                    visited[i]++;
+                }
+            }
+        }
+        
+        for(let k = 0; k < visited.length;k++){
+            if(visited[k] === target.length-1){
+                arr.push([words[k],idx+1]);
+                words[k] = 1;
+            }
+        }
+    }
+    
+}
