@@ -1,0 +1,35 @@
+function getParent(parent,c){
+  if (parent[c] === c) return c;
+  return (parent[c] = getParent(parent, parent[c]));
+}
+
+function unionParent(parent, c1,c2){
+  const [n1,n2] = [getParent(parent,c1),getParent(parent,c2)]
+  if (n1 < n2) return parent[n2] = n1
+  else return parent[n1] = n2
+}
+
+function findParent(parent, c1,c2){
+  const [n1,n2] = [getParent(parent,c1),getParent(parent,c2)]
+  return n1 === n2
+}
+
+function solution(n, costs) {
+    costs.sort((a,b) => a[2] - b[2])
+    let parent = new Array(n).fill(null).map((_,i) => i)
+    let answer = 0
+    
+    for(let qqq of costs){
+      const [fir,sec, tir] = qqq
+      if(!findParent(parent,fir,sec)){
+        
+        answer += tir
+        unionParent(parent,fir,sec)
+        
+      }
+  }
+  
+  return answer
+}
+
+크루스칼 알고리즘을 통한 최소신장트리 만들기

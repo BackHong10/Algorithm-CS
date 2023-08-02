@@ -1,0 +1,39 @@
+def calculate(num1,num2):
+    temp_set = set()
+    for qqq in num1:
+        for www in num2:
+            temp_set.add(qqq + www)
+            temp_set.add(qqq - www)
+            temp_set.add(qqq * www)
+            if www != 0:
+                temp_set.add(qqq // www)
+                
+    return temp_set
+
+
+
+
+
+def solution(N, number):
+    result = {}
+    result[1] = {N}
+    answer = -1
+    if N == number:
+        return 1
+    
+    for i in range(2,9):
+        temp_set = {int(str(N)*i)}
+        n = 1
+        
+        while n < i:
+            temp_set.update(calculate(result[n], result[i-n]))
+            n += 1
+        
+        if number in temp_set:
+            answer = i
+            break
+            
+        result[i] = temp_set
+        
+    
+    return answer 
