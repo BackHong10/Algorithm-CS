@@ -1,0 +1,25 @@
+import datetime
+def solution(book_time):
+    
+    for i in range(len(book_time)):
+        [fir,sec] = book_time[i]
+        newFir = int(fir.split(":")[0]) * 60 + int(fir.split(":")[1])
+        newSec = int(sec.split(":")[0]) * 60 + int(sec.split(":")[1]) + 10
+        book_time[i] = [newFir,newSec]
+    room = 1
+    full = []
+    book_time.sort()
+    full.append(book_time.pop(0)[1])
+    
+    for i in range(len(book_time)):
+        
+        if full[0] > book_time[i][0]:
+            room += 1
+        else:
+            full.pop(0)
+        
+        full.append(book_time[i][1])
+        full.sort()# full은 퇴실시간 기준 정렬
+        
+        
+    return room
